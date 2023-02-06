@@ -28,14 +28,14 @@ sort_type = input("""
 # check input and if it is not valid request for input again
 correct_type = False
 
-while not correct_type:
-    try:
-        if int(sort_type) < 1 or int(sort_type) > 3:
-            sort_type = input('Please, check sort type, select 1,2 or 3: ')
+while not correct_type:  # check flag for correct type of sorting
+    try:  # exception for incorrect values
+        if int(sort_type) < 1 or int(sort_type) > 3:  # check validity of values
+            sort_type = input('Please, check sort type, select 1,2 or 3: ')  # ask for correct input
         else:
-            correct_type = True
+            correct_type = True  # change value of flag
 
-    except ValueError:
+    except ValueError:  # exception ask for input again
         print('Non numeric')
         sort_type = input('Please, check sort type, select 1,2 or 3: ')
 
