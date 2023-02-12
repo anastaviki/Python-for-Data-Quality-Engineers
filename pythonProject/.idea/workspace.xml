@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ab3378c-b912-473d-a050-826bee7a2125" name="Changes" comment="" />
+    <list default="true" id="7bd10f63-5a25-4728-8510-aaa9578a2259" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,10 +10,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2LeNt9b6RHZ31bkBVGjzGdKbSmY" />
+  <component name="ProjectId" id="2LeOcFwbNiNoC7cHVMGaJyMb8AY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,14 +18,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "last_opened_file_path": "C:/Users/Anastasiya_Viktarovi/Documents/GitHub/Python-for-Data-Quality-Engineers/String"
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Anastasiya_Viktarovi\Documents\GitHub\Python-for-Data-Quality-Engineers\String" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="pythonProject" />
@@ -55,11 +48,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3ab3378c-b912-473d-a050-826bee7a2125" name="Changes" comment="" />
-      <created>1676227799174</created>
+      <changelist id="7bd10f63-5a25-4728-8510-aaa9578a2259" name="Changes" comment="" />
+      <created>1676228158785</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1676227799174</updated>
+      <updated>1676228158785</updated>
     </task>
     <servers />
   </component>
