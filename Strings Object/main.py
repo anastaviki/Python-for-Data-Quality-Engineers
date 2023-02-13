@@ -45,7 +45,9 @@ for sentence in sentences:  # loop for every sentence
 
 last_words = re.findall(r'\b\w+\.', start_text)  # find all last words in every sentence
 last_sent = "".join(last_words).replace(".", " ").strip().capitalize() + '.'  # generate last sentence
-new_text = start_text + " " + last_sent  # add last sentence to existing sentence
+new_text = start_text
+# add last sentence
+new_text = new_text.replace("END OF this Paragraph.".lower(), "END OF this Paragraph! ".lower()+last_sent)
 new_text = new_text.replace(" iz ", " is ")  # replace incorrect iz
 print("Text after all changes: \n",new_text)
 res = len(re.findall(r"\s", start_text))  # find all whitespaces
