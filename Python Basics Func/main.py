@@ -13,97 +13,141 @@ import random
 start = 0
 end = 1000
 quantity = 100
-# create list of 100 values with random values from 0 to 1000
-list_for_sort = [random.randint(start, end) for x in range(quantity)]
-# print list before sorting
-print("List before sorting: ", list)
-# request for input to chose type of sorting
 
-sort_type = input("""
-    Select type of sort:
-    1 - bubble sort
-    2 - cocktail sort
-    3 - selection sort
-    """)
-# check input and if it is not valid request for input again
-correct_type = False
 
-while not correct_type:  # check flag for correct type of sorting
-    try:  # exception for incorrect values
-        if int(sort_type) < 1 or int(sort_type) > 3:  # check validity of values
-            sort_type = input('Please, check sort type, select 1,2 or 3: ')  # ask for correct input
-        else:
-            correct_type = True  # change value of flag
+# create list of p_quantity values with random values from p_start to p_end
+def create_random_list(p_start, p_end, p_quantity):
+    return [random.randint(p_start, p_end) for x in range(p_quantity)]
 
-    except ValueError:  # exception ask for input again
-        print('Non numeric')
-        sort_type = input('Please, check sort type, select 1,2 or 3: ')
 
-# use if for select branch to sort list using selected type of sort
-if sort_type == '1':
-    # bubble sort
-    for i in range(quantity - 1):  # outer loop for next comparison iteration
-        for j in range(quantity - i - 1):  # inner loop to compare 2 adjacent standing numbers
-            if list_for_sort[j] > list_for_sort[j + 1]:  # compare values
-                # swap numbers if left is greater than right
-                list_for_sort[j], list_for_sort[j + 1] = list_for_sort[j + 1], list_for_sort[j]
+# get input from user
+def get_value():
+    # request for input to chose type of sorting
+    r_sort_type = input("""Select type of sort:
+        1 - bubble sort
+        2 - cocktail sort
+        3 - selection sort
+        """)
+    return r_sort_type
 
-    print("Bubble sort result:", list_for_sort)
 
-elif sort_type == '2':
-    # cocktail sort
+# validate an input and request input from user ones more in case of incorrect value
+def validate_type(p_sort_type):
+    # check input and if it is not valid request for input again
+    correct_type = False
+    while not correct_type:  # check flag for correct type of sorting
+        try:  # exception for incorrect values
+            if int(p_sort_type) < 1 or int(p_sort_type) > 3:  # check validity of values
+                print('Out of range')
+                p_sort_type = get_value()  # ask for correct input
+            else:
+                correct_type = True  # change value of flag
+
+        except ValueError:  # exception ask for input again
+            print('Non numeric')
+            p_sort_type = get_value()
+
+
+# compare 2 values in list and swap values if needed
+def compare_and_swap_values(p_list, p_pos_1, p_pos_2 ):
+    if p_list[p_pos_1] > p_list[p_pos_2]:  # compare values
+        # swap numbers if left is greater than right
+        p_list[p_pos_1], p_list[p_pos_2] = p_list[p_pos_2], p_list[p_pos_1]
+    return p_list
+
+
+# bubble sort of list
+def bubble_sort(p_list_for_sort):
+    p_quantity = len(p_list_for_sort)
+    for i in range(p_quantity - 1):  # outer loop for next comparison iteration
+        for j in range(p_quantity - i - 1):  # inner loop to compare 2 adjacent standing numbers
+            p_list_for_sort = compare_and_swap_values(p_list_for_sort, j, j+1)
+    print("Bubble sort result: ", p_list_for_sort)
+
+
+# cocktail sort of list
+def cocktail_sort(p_list_for_sort):
     left = 0
-    right = len(list_for_sort) - 1
+    right = len(p_list_for_sort) - 1
     while left <= right:  # loop while left border less or equal than right
         for i in range(left, right, 1):  # loop to compare 2 adjacent standing numbers - direct direction
-            if list_for_sort[i] > list_for_sort[i + 1]:  # compare values
-                # swap numbers if left is greater than right
-                list_for_sort[i], list_for_sort[i + 1] = list_for_sort[i + 1], list_for_sort[i]
+            p_list_for_sort = compare_and_swap_values(p_list_for_sort, i, i + 1)
         right -= 1  # move right border
 
         for i in range(right, left, -1):  # loop to compare 2 adjacent standing numbers - reverse direction
-            if list_for_sort[i - 1] > list_for_sort[i]:  # compare values
-                # swap numbers if left is greater than right
-                list_for_sort[i], list_for_sort[i - 1] = list_for_sort[i - 1], list_for_sort[i]
+            p_list_for_sort = compare_and_swap_values(p_list_for_sort, i - 1, i)
         left += 1  # move left border
-    print("Cocktail sort result:", list_for_sort)
+    print("Cocktail sort result: ", list_for_sort)
+
+
+# find position of minimum value in list
+def find_min_value_pos(p_list_for_sort, p_min_value_pos):
+    # loop to find min value position in list
+    for item_pos in range(p_min_value_pos, len(p_list_for_sort)):
+        if p_list_for_sort[p_min_value_pos] > p_list_for_sort[item_pos]:  # compare values
+            p_min_value_pos = item_pos  # new min value position for 1 iteration
+    return p_min_value_pos
+
+
+# selection sort
+def selection_sort(p_list_for_sort):
+    for i in range(len(p_list_for_sort)):  # outer loop for find min values for all iterations
+        min_value_pos = find_min_value_pos(p_list_for_sort, i)  # find min value position in list
+        # swap value from current position from outer loop and min value
+        p_list_for_sort = compare_and_swap_values(p_list_for_sort, i, min_value_pos)
+    print("Selection sort result: ", p_list_for_sort,)
+
+
+# calculate sum and numbers for odd and even values in list
+def calculate_sum_and_numbers(p_list_for_sort):
+    # initialise variables for average calculation
+    p_even_sum = 0
+    p_odd_sum = 0
+    p_even_count = 0
+    p_odd_count = 0
+    for i in p_list_for_sort:  # loop on all values from the list
+        if i % 2 == 0:  # check is even
+            p_even_count += 1  # counter of even values
+            p_even_sum += i  # sum of even values
+        else:  # for odd values
+            p_odd_count += 1  # counter of add values
+            p_odd_sum += i  # sum of odd values
+    return p_even_sum, p_odd_sum, p_even_count, p_odd_count
+
+
+# calculate average value
+def calculate_avg(p_sum, p_count, type_of_nums=""):
+    try:
+        r_avg = p_sum / p_count
+        # use formatting for better readability - output a float number with three decimal places
+        print('Average value for all', type_of_nums, 'numbers in list:  %.3f' % r_avg)
+    except ZeroDivisionError:
+        print('There is no ', type_of_nums, ' numbers in list')
+
+
+list_for_sort = create_random_list(start, end, quantity)
+# print list before sorting
+print("List before sorting: ", list_for_sort)
+sort_type = get_value()
+
+validate_type(sort_type)
+# use if for select branch to sort list using selected type of sort
+if sort_type == '1':
+    # bubble sort
+    bubble_sort(list_for_sort)
+
+elif sort_type == '2':
+    # cocktail sort
+    cocktail_sort(list_for_sort)
 
 elif sort_type == '3':
     # selection sort
-    for i in range(len(list_for_sort)):  # outer loop for find min values for all iterations
-        min_value_pos = i
-        for item_pos in range(i, len(list_for_sort)):  # inner loop to find min value position for 1 iteration
-            if list_for_sort[min_value_pos] > list_for_sort[item_pos]:  # compare values
-                min_value_pos = item_pos  # new min value position for 1 iteration
-                # swap value from current position from outer loop and min value
-        list_for_sort[i], list_for_sort[min_value_pos] = list_for_sort[min_value_pos], list_for_sort[i]
+    selection_sort(list_for_sort)
 
-    print("Selection sort result:", list_for_sort)
 
-# initialise variables for average calculation
-even_sum = 0
-odd_sum = 0
-even_count = 0
-odd_count = 0
-for i in list_for_sort:  # loop on all values from the list
-    if i % 2 == 0:  # check is even
-        even_count += 1  # counter of even values
-        even_sum += i  # sum of even values
-    else:  # for odd values
-        odd_count += 1  # counter of add values
-        odd_sum += i  # sum of odd values
+even_sum, odd_sum, even_count, odd_count = calculate_sum_and_numbers(list_for_sort)
 # calculate average for even values, use try except for case if there is no even values in the list
-try:
-    even_avg = even_sum/even_count
-    # use formatting for better readability - output a float number with three decimal places
-    print('Average value for all even numbers in list:  %.3f' % even_avg)
-except ZeroDivisionError:
-    print('There is no even numbers in list')
+calculate_avg(even_sum, even_count, "even")
 # calculate average for odd values, use try except for case if there is no odd values in the list
-try:
-    odd_avg = odd_sum/odd_count
-    # use formatting for better readability - output a float number with three decimal places
-    print('Average value for all odd numbers in list: %.3f' % odd_avg)
-except ZeroDivisionError:
-    print('There is no odd numbers in list')
+calculate_avg(odd_sum, odd_count, "odd")
 
