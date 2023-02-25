@@ -12,7 +12,6 @@ class Window (WindowMain):
 
     def __init__(self, p_title,p_lable =""  ):
         WindowMain.__init__(self, p_title,p_lable )
-
         self.combo = Combobox(self.window)
         self.btn = Button(self.window, text="Add", command=self.clicked)
         self.input_type = 0
