@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0d7e7eb-0185-4a66-9843-95c295da839a" name="Changes" comment="" />
+    <list default="true" id="971ae8ee-f651-4184-a50b-05c25e347e3b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +13,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2LMh9gwHCy8vOsg0h48cc2ehu7h" />
+  <component name="ProjectId" id="2LE4EtYC2fkL5bPsCl2KC9F15r9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,12 +21,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_opened_file_path": "C:/Users/Anastasiya_Viktarovi/Documents/GitHub/Python-for-Data-Quality-Engineers/Classes OOP"
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Collections" />
+      <module name="Python Basics" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -50,11 +52,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e0d7e7eb-0185-4a66-9843-95c295da839a" name="Changes" comment="" />
-      <created>1675686708282</created>
+      <changelist id="971ae8ee-f651-4184-a50b-05c25e347e3b" name="Changes" comment="" />
+      <created>1675422799537</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1675686708282</updated>
+      <updated>1675422799537</updated>
     </task>
     <servers />
   </component>
