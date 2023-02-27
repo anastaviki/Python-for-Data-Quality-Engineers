@@ -20,6 +20,13 @@ from tkinter import *
 from tkinter.ttk import Combobox
 from tkcalendar import Calendar
 from datetime import datetime
+from tkinter import filedialog as fd
+import sys
+import os
+sys.path.append(os.getcwd()+"\Strings Object Func")
+import string_pack as sp
+
+
 
 
 # create class for gui
@@ -49,7 +56,7 @@ class Window (WindowMain):  # main window for select type of publication
         self.exit_code = 0
 
     def show_window(self):  # graw main window
-        self.combo['values'] = ("News", "Privat ad", "Recipe")
+        self.combo['values'] = ("News", "Privat ad", "Recipe", "Provide records with file")
         self.combo.current(0)
         self.combo.grid(column=1, row=0)
         self.btn.grid(column=2, row=0)
@@ -122,6 +129,34 @@ class WindowAddRec(WindowAddPub):  # class for recipes
     def __init__(self, p_title, p_lable, p_lable_2):  # will have only one input
         WindowAddPub.__init__(self, p_title, p_lable, p_lable_2)
 
+
+class WindowAddFromFile(WindowMain):  # class for adding from file
+    def __init__(self, p_title, p_lable):  # will have only one input
+        WindowMain.__init__(self, p_title, p_lable)
+        self.btn_file = Button(self.window, text="Select", command=self.select_file)
+        self.btn_def = Button(self.window, text="Default file", command=self.def_file)
+        self.filename = "input.txt"
+
+    def show_window(self):  # draw window with adding aa add
+        self.btn_file.grid(column=2, row=0)
+        self.btn_def.grid(column=3, row=0)
+        WindowMain.show_window(self)
+
+    def select_file(self):
+        self.filename = fd.askopenfilename()
+        self.window.destroy()
+
+    def def_file(self):
+        self.window.destroy()
+
+class ParcerFile():
+    def __init__(self, p_file):
+        self.path = p_file
+        print (self.path)
+
+
+    def parc(self):
+        pass
 
 class Publication:  # class for publications
     def __init__(self, p_type, p_text):  # will have type and text
@@ -201,11 +236,15 @@ while window.exit_code == 0:  # open window with adding new publications until e
         ad = Ads(type_of_pub, add_ad.new_text, add_ad.new_date)
         ad.add_to_feed()
 
-    else:
+    elif type_of_pub == "Recipe":
         add_rec = WindowAddRec("Add New", "Fill all fields", "Add new Receipe:")
         add_rec.show_window()
         rec = Rec(type_of_pub, add_rec.new_text)
         rec.add_to_feed()
+    else:
+        add_file = WindowAddFromFile("Add New", "Select file")
+        add_file.show_window()
+        par = ParcerFile(add_file.filename)
     window = Window("Add Publications", "Select Type of Publication")
     window.show_window()
     type_of_pub = window.input_type

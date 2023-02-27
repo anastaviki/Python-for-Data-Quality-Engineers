@@ -1,19 +1,13 @@
-# Description
-# Create a tool, which will do user generated news feed:
-# 1.User select what data type he wants to add
+# Expand previous Homework 5 with additional class, which allow to provide records by text file:
 #
-# 2.Provide record type required data
+# 1.Define your input format (one or many records)
 #
-# 3.Record is published on text file in special format
-# You need to implement:
+# 2.Default folder or user provided file path
 #
-# 1.News – text and city as input. Date is calculated during publishing.
+# 3.Remove file if it was successfully processed
 #
-# 2.Privat ad – text and expiration date as input. Day left is calculated during publishing.
-#
-# 3.Your unique one with unique publish rules.
-#
-# Each new record should be added to the end of file.Commit file in git for review.
+# 4.Apply case normalization functionality form Homework 3/4
+
 # import all modules
 import random
 from tkinter import *
