@@ -23,6 +23,7 @@ from datetime import datetime
 from tkinter import filedialog as fd
 import sys
 import os
+import re
 sys.path.append(os.getcwd()+"\Strings Object Func")
 import string_pack as sp
 
@@ -153,10 +154,27 @@ class ParcerFile():
     def __init__(self, p_file):
         self.path = p_file
         print (self.path)
-
+        self.statr_rec =0
+        self.type_rec =""
+        self.text_of_rec = ""
 
     def parc(self):
+        with open(self.path, 'r') as file:
+            for line in file.readlines():
+                if re.findall("^(\w|\s)+-+$", line):
+                    self.type_rec = line.replace('-', '')
+                    self.statr_rec = 1
+                elif re.match(r'^-+$', line) and self.statr_rec == 1:
+                    self.statr_rec = 0
+                    print ("text: " + self.text_of_rec)
+                elif self.statr_rec == 1 and self.statr_rec == 1:
+                    self.text_of_rec = self.text_of_rec + line
+    def pars_body(self, p_type_rec, p_text):
         pass
+
+
+
+
 
 class Publication:  # class for publications
     def __init__(self, p_type, p_text):  # will have type and text
@@ -218,6 +236,7 @@ class Rec (Publication):  # class for recipes
         self.add_line_to_feed("Number of calories: " + str(self.cal))
 
 
+
 window = Window("Add Publications", "Select Type of Publication")
 window.show_window()  # add window for select type of publication
 type_of_pub = window.input_type
@@ -245,6 +264,7 @@ while window.exit_code == 0:  # open window with adding new publications until e
         add_file = WindowAddFromFile("Add New", "Select file")
         add_file.show_window()
         par = ParcerFile(add_file.filename)
+        par.parc()
     window = Window("Add Publications", "Select Type of Publication")
     window.show_window()
     type_of_pub = window.input_type
