@@ -24,10 +24,8 @@ from tkinter import filedialog as fd
 import sys
 import os
 import re
-sys.path.append(os.getcwd()+"\Strings Object Func")
-import string_pack as sp
-
-
+sys.path.append(os.getcwd() + r"\Strings Object Func")  # add path
+import string_pack as sp  # import string HW
 
 
 # create class for gui
@@ -143,37 +141,87 @@ class WindowAddFromFile(WindowMain):  # class for adding from file
         self.btn_def.grid(column=3, row=0)
         WindowMain.show_window(self)
 
-    def select_file(self):
+    def select_file(self):  # select file
         self.filename = fd.askopenfilename()
         self.window.destroy()
 
-    def def_file(self):
+    def def_file(self):  # for default file
         self.window.destroy()
 
-class ParcerFile():
+
+class ParcerFile:  # class for parsing file
     def __init__(self, p_file):
         self.path = p_file
-        print (self.path)
-        self.statr_rec =0
-        self.type_rec =""
+        self.statr_rec = 0
+        self.type_rec = ""
         self.text_of_rec = ""
 
     def parc(self):
         with open(self.path, 'r') as file:
             for line in file.readlines():
-                if re.findall("^(\w|\s)+-+$", line):
-                    self.type_rec = line.replace('-', '')
+                if re.findall(r"^(\w|\s)+-+$", line):  # find first line of record
+                    self.type_rec = line.replace('-', '').strip()
                     self.statr_rec = 1
-                elif re.match(r'^-+$', line) and self.statr_rec == 1:
-                    self.statr_rec = 0
-                    print ("text: " + self.text_of_rec)
-                elif self.statr_rec == 1 and self.statr_rec == 1:
+                elif self.statr_rec == 1 and self.statr_rec == 1 and not re.match(r'^-+$', line):  # body of record
                     self.text_of_rec = self.text_of_rec + line
-    def pars_body(self, p_type_rec, p_text):
+                elif self.statr_rec == 1:  # end of record
+                    self.statr_rec = 0
+                    if self.type_rec == "News":  # parsing of news body
+                        parc_new = ParserNew(self.type_rec, self.text_of_rec)
+                        parc_new.parc_rec()
+                    elif self.type_rec == "Privat ad":  # parsing of add body
+                        parc_add = ParserAdd(self.type_rec, self.text_of_rec)
+                        parc_add.parc_rec()
+                    else:  # parsing of recipe record
+                        parc_rec = ParserRec(self.type_rec, self.text_of_rec)
+                        parc_rec.parc_rec()
+
+                    self.text_of_rec = ""
+
+
+class ParserRecord:  # class for parsing body of record from file
+    def __init__(self, p_type_rec, p_text):
+        self.type_rec = p_type_rec
+        self.text_of_record = p_text
+        self.main_text = ""
+
+    def parc_rec(self):
         pass
 
 
+class ParserNew (ParserRecord):  # parsing of New body from file
+    def __init__(self, p_type_rec, p_text):
+        ParserRecord.__init__(self, p_type_rec, p_text)
+        self.city = ""
 
+    def parc_rec(self):
+        self.city = self.text_of_record.split('\n')[0]
+
+        self.main_text = sp.text_capitalise('\n'.join(self.text_of_record.split('\n')[1:]))
+        new_from_file = News(self.type_rec, self.main_text, self.city)  # create a New object
+        new_from_file.add_to_feed()
+
+
+class ParserAdd (ParserRecord):  # parsing of Add body from file
+    def __init__(self, p_type_rec, p_text):
+        ParserRecord.__init__(self, p_type_rec, p_text)
+        self.date = ""
+
+    def parc_rec(self):
+        self.date = self.text_of_record.split('\n')[0]
+        self.main_text = sp.text_capitalise('\n'.join(self.text_of_record.split('\n')[1:]))
+        add_from_file = Ads(self.type_rec, self.main_text, self.date)  # create an Add object
+        add_from_file.add_to_feed()
+
+
+class ParserRec (ParserRecord):  # parsing of Recipe body from file
+    def __init__(self, p_type_rec, p_text):
+        ParserRecord.__init__(self, p_type_rec, p_text)
+
+    def parc_rec(self):
+        self.main_text = sp.text_capitalise(self.text_of_record)
+        rec_from_file = Rec(self.type_rec, self.main_text)   # create an Rec object
+        rec_from_file.add_to_feed()
 
 
 class Publication:  # class for publications
@@ -223,7 +271,7 @@ class Ads (Publication):  # class for adds
         self.days_left = 0
 
     def add_main_part(self):  # add main part of add
-        self.days_left = str((datetime.strptime(add_ad.new_date, '%m/%d/%y')-self.now).days)
+        self.days_left = str((datetime.strptime(self.date_until, '%m/%d/%y')-self.now).days)
         self.add_line_to_feed("Actual until: "+self.date_until+", " + self.days_left + " days left")
 
 
@@ -236,13 +284,12 @@ class Rec (Publication):  # class for recipes
         self.add_line_to_feed("Number of calories: " + str(self.cal))
 
 
-
 window = Window("Add Publications", "Select Type of Publication")
 window.show_window()  # add window for select type of publication
 type_of_pub = window.input_type
-
-while window.exit_code == 0:  # open window with adding new publications until exit from the app
-# depends on type of publication create an object of sutable class and proced adding publication to feed
+# open window with adding new publications until exit from the app
+while window.exit_code == 0:
+    # depends on type of publication create an object of sutable class and proced adding publication to feed
     if type_of_pub == "News":
         add_new = WindowAddNews("Add New", "Fill all fields", "Add text of the new:")
         add_new.show_window()
