@@ -1,19 +1,31 @@
-# Expand previous Homework 5 with additional class, which allow to provide records by text file:
+# Description
+# Create a tool, which will do user generated news feed:
+# 1.User select what data type he wants to add
 #
-# 1.Define your input format (one or many records)
+# 2.Provide record type required data
 #
-# 2.Default folder or user provided file path
+# 3.Record is published on text file in special format
+# You need to implement:
 #
-# 3.Remove file if it was successfully processed
+# 1.News – text and city as input. Date is calculated during publishing.
 #
-# 4.Apply case normalization functionality form Homework 3/4
-
+# 2.Privat ad – text and expiration date as input. Day left is calculated during publishing.
+#
+# 3.Your unique one with unique publish rules.
+#
+# Each new record should be added to the end of file.Commit file in git for review.
 # import all modules
 import random
 from tkinter import *
 from tkinter.ttk import Combobox
 from tkcalendar import Calendar
 from datetime import datetime
+from tkinter import filedialog as fd
+import sys
+import os
+import re
+sys.path.append(os.getcwd() + r"\Strings Object Func")  # add path
+import string_pack as sp  # import string HW
 
 
 # create class for gui
@@ -43,7 +55,7 @@ class Window (WindowMain):  # main window for select type of publication
         self.exit_code = 0
 
     def show_window(self):  # graw main window
-        self.combo['values'] = ("News", "Privat ad", "Recipe")
+        self.combo['values'] = ("News", "Privat ad", "Recipe", "Provide records with file")
         self.combo.current(0)
         self.combo.grid(column=1, row=0)
         self.btn.grid(column=2, row=0)
@@ -117,6 +129,101 @@ class WindowAddRec(WindowAddPub):  # class for recipes
         WindowAddPub.__init__(self, p_title, p_lable, p_lable_2)
 
 
+class WindowAddFromFile(WindowMain):  # class for adding from file
+    def __init__(self, p_title, p_lable):  # will have only one input
+        WindowMain.__init__(self, p_title, p_lable)
+        self.btn_file = Button(self.window, text="Select", command=self.select_file)
+        self.btn_def = Button(self.window, text="Default file", command=self.def_file)
+        self.filename = "input.txt"
+
+    def show_window(self):  # draw window with adding aa add
+        self.btn_file.grid(column=2, row=0)
+        self.btn_def.grid(column=3, row=0)
+        WindowMain.show_window(self)
+
+    def select_file(self):  # select file
+        self.filename = fd.askopenfilename()
+        self.window.destroy()
+
+    def def_file(self):  # for default file
+        self.window.destroy()
+
+
+class ParcerFile:  # class for parsing file
+    def __init__(self, p_file):
+        self.path = p_file
+        self.statr_rec = 0
+        self.type_rec = ""
+        self.text_of_rec = ""
+
+    def parc(self):
+        with open(self.path, 'r') as file:
+            for line in file.readlines():
+                if re.findall(r"^(\w|\s)+-+$", line):  # find first line of record
+                    self.type_rec = line.replace('-', '').strip()
+                    self.statr_rec = 1
+                elif self.statr_rec == 1 and self.statr_rec == 1 and not re.match(r'^-+$', line):  # body of record
+                    self.text_of_rec = self.text_of_rec + line
+                elif self.statr_rec == 1:  # end of record
+                    self.statr_rec = 0
+                    if self.type_rec == "News":  # parsing of news body
+                        parc_new = ParserNew(self.type_rec, self.text_of_rec)
+                        parc_new.parc_rec()
+                    elif self.type_rec == "Privat ad":  # parsing of add body
+                        parc_add = ParserAdd(self.type_rec, self.text_of_rec)
+                        parc_add.parc_rec()
+                    else:  # parsing of recipe record
+                        parc_rec = ParserRec(self.type_rec, self.text_of_rec)
+                        parc_rec.parc_rec()
+
+                    self.text_of_rec = ""
+
+
+class ParserRecord:  # class for parsing body of record from file
+    def __init__(self, p_type_rec, p_text):
+        self.type_rec = p_type_rec
+        self.text_of_record = p_text
+        self.main_text = ""
+
+    def parc_rec(self):
+        pass
+
+
+class ParserNew (ParserRecord):  # parsing of New body from file
+    def __init__(self, p_type_rec, p_text):
+        ParserRecord.__init__(self, p_type_rec, p_text)
+        self.city = ""
+
+    def parc_rec(self):
+        self.city = self.text_of_record.split('\n')[0]
+
+        self.main_text = sp.text_capitalise('\n'.join(self.text_of_record.split('\n')[1:]))
+        new_from_file = News(self.type_rec, self.main_text, self.city)  # create a New object
+        new_from_file.add_to_feed()
+
+
+class ParserAdd (ParserRecord):  # parsing of Add body from file
+    def __init__(self, p_type_rec, p_text):
+        ParserRecord.__init__(self, p_type_rec, p_text)
+        self.date = ""
+
+    def parc_rec(self):
+        self.date = self.text_of_record.split('\n')[0]
+        self.main_text = sp.text_capitalise('\n'.join(self.text_of_record.split('\n')[1:]))
+        add_from_file = Ads(self.type_rec, self.main_text, self.date)  # create an Add object
+        add_from_file.add_to_feed()
+
+
+class ParserRec (ParserRecord):  # parsing of Recipe body from file
+    def __init__(self, p_type_rec, p_text):
+        ParserRecord.__init__(self, p_type_rec, p_text)
+
+    def parc_rec(self):
+        self.main_text = sp.text_capitalise(self.text_of_record)
+        rec_from_file = Rec(self.type_rec, self.main_text)   # create an Rec object
+        rec_from_file.add_to_feed()
+
+
 class Publication:  # class for publications
     def __init__(self, p_type, p_text):  # will have type and text
         self.type = p_type
@@ -164,7 +271,7 @@ class Ads (Publication):  # class for adds
         self.days_left = 0
 
     def add_main_part(self):  # add main part of add
-        self.days_left = str((datetime.strptime(add_ad.new_date, '%m/%d/%y')-self.now).days)
+        self.days_left = str((datetime.strptime(self.date_until, '%m/%d/%y')-self.now).days)
         self.add_line_to_feed("Actual until: "+self.date_until+", " + self.days_left + " days left")
 
 
@@ -180,9 +287,9 @@ class Rec (Publication):  # class for recipes
 window = Window("Add Publications", "Select Type of Publication")
 window.show_window()  # add window for select type of publication
 type_of_pub = window.input_type
-
-while window.exit_code == 0:  # open window with adding new publications until exit from the app
-# depends on type of publication create an object of sutable class and proced adding publication to feed
+# open window with adding new publications until exit from the app
+while window.exit_code == 0:
+    # depends on type of publication create an object of sutable class and proced adding publication to feed
     if type_of_pub == "News":
         add_new = WindowAddNews("Add New", "Fill all fields", "Add text of the new:")
         add_new.show_window()
@@ -195,11 +302,16 @@ while window.exit_code == 0:  # open window with adding new publications until e
         ad = Ads(type_of_pub, add_ad.new_text, add_ad.new_date)
         ad.add_to_feed()
 
-    else:
+    elif type_of_pub == "Recipe":
         add_rec = WindowAddRec("Add New", "Fill all fields", "Add new Receipe:")
         add_rec.show_window()
         rec = Rec(type_of_pub, add_rec.new_text)
         rec.add_to_feed()
+    else:
+        add_file = WindowAddFromFile("Add New", "Select file")
+        add_file.show_window()
+        par = ParcerFile(add_file.filename)
+        par.parc()
     window = Window("Add Publications", "Select Type of Publication")
     window.show_window()
     type_of_pub = window.input_type
