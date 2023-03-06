@@ -10,7 +10,7 @@ import random
 import time
 
 
-def timer(f):  # decorator for calculating time of execution of funcrion
+def timer(f):  # decorator for calculating time of execution of function
     def tmp(*args, **kwargs):
         t = time.time()
         res = f(*args, **kwargs)
@@ -152,6 +152,3 @@ elif sort_type == '3':
 
 
 calculate_sum_and_numbers(list_for_sort)
-
-
-
