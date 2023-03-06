@@ -7,6 +7,17 @@
 
 # import module random
 import random
+import time
+
+
+def timer(f):  # decorator for calculating time of execution of funcrion
+    def tmp(*args, **kwargs):
+        t = time.time()
+        res = f(*args, **kwargs)
+        print("Time for executing", f.__name__, " function: %f" % (time.time()-t))
+        return res
+
+    return tmp
 
 
 # initialise variables for our list
@@ -49,7 +60,7 @@ def validate_type(p_sort_type):
 
 
 # compare 2 values in list and swap values if needed
-def compare_and_swap_values(p_list, p_pos_1, p_pos_2 ):
+def compare_and_swap_values(p_list, p_pos_1, p_pos_2):
     if p_list[p_pos_1] > p_list[p_pos_2]:  # compare values
         # swap numbers if left is greater than right
         p_list[p_pos_1], p_list[p_pos_2] = p_list[p_pos_2], p_list[p_pos_1]
@@ -57,6 +68,7 @@ def compare_and_swap_values(p_list, p_pos_1, p_pos_2 ):
 
 
 # bubble sort of list
+@timer  # use decorator for calculating time of execution
 def bubble_sort(p_list_for_sort):
     p_quantity = len(p_list_for_sort)
     for i in range(p_quantity - 1):  # outer loop for next comparison iteration
@@ -66,6 +78,7 @@ def bubble_sort(p_list_for_sort):
 
 
 # cocktail sort of list
+@timer  # use decorator for calculating time of execution
 def cocktail_sort(p_list_for_sort):
     left = 0
     right = len(p_list_for_sort) - 1
@@ -90,6 +103,7 @@ def find_min_value_pos(p_list_for_sort, p_min_value_pos):
 
 
 # selection sort
+@timer  # use decorator for calculating time of execution
 def selection_sort(p_list_for_sort):
     for i in range(len(p_list_for_sort)):  # outer loop for find min values for all iterations
         min_value_pos = find_min_value_pos(p_list_for_sort, i)  # find min value position in list
@@ -100,29 +114,21 @@ def selection_sort(p_list_for_sort):
 
 # calculate sum and numbers for odd and even values in list
 def calculate_sum_and_numbers(p_list_for_sort):
-    # initialise variables for average calculation
-    p_even_sum = 0
-    p_odd_sum = 0
-    p_even_count = 0
-    p_odd_count = 0
-    for i in p_list_for_sort:  # loop on all values from the list
-        if i % 2 == 0:  # check is even
-            p_even_count += 1  # counter of even values
-            p_even_sum += i  # sum of even values
-        else:  # for odd values
-            p_odd_count += 1  # counter of add values
-            p_odd_sum += i  # sum of odd values
-    return p_even_sum, p_odd_sum, p_even_count, p_odd_count
 
-
-# calculate average value
-def calculate_avg(p_sum, p_count, type_of_nums=""):
     try:
-        r_avg = p_sum / p_count
-        # use formatting for better readability - output a float number with three decimal places
-        print('Average value for all', type_of_nums, 'numbers in list:  %.3f' % r_avg)
+        # calculate and print average for even numbers
+        print('Average value for all even numbers in list:  %.3f'
+              % (sum([v for k, v in enumerate(p_list_for_sort) if v % 2 == 0]) /
+                 sum([1 for k, v in enumerate(p_list_for_sort) if v % 2 == 0])))
     except ZeroDivisionError:
-        print('There is no ', type_of_nums, ' numbers in list')
+        print('There is no even numbers in list')
+    try:
+        # calculate and print average for odd numbers
+        print('Average value for all odd numbers in list:  %.3f'
+              % (sum([v for k, v in enumerate(p_list_for_sort) if v % 2 == 1]) /
+                 sum([1 for k, v in enumerate(p_list_for_sort) if v % 2 == 1])))
+    except ZeroDivisionError:
+        print('There is no odd numbers in list')
 
 
 list_for_sort = create_random_list(start, end, quantity)
@@ -145,9 +151,7 @@ elif sort_type == '3':
     selection_sort(list_for_sort)
 
 
-even_sum, odd_sum, even_count, odd_count = calculate_sum_and_numbers(list_for_sort)
-# calculate average for even values, use try except for case if there is no even values in the list
-calculate_avg(even_sum, even_count, "even")
-# calculate average for odd values, use try except for case if there is no odd values in the list
-calculate_avg(odd_sum, odd_count, "odd")
+calculate_sum_and_numbers(list_for_sort)
+
+
 
