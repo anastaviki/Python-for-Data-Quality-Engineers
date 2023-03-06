@@ -99,7 +99,10 @@ class WindowAddAd(WindowAddPub):  # class for adds
     def __init__(self, p_title, p_lable, p_lable_2):  # also will have expiration date
         WindowAddPub.__init__(self, p_title, p_lable, p_lable_2)
         self.lbl_c = Label(self.window, text="Expired day:")
-        self.cal = Calendar(self.window, selectmode='day', year=2023, month=2, day=26)
+        self.cal = Calendar(self.window, selectmode='day',
+                            year=datetime.now().year,
+                            month=datetime.now().month,
+                            day=datetime.now().day)  # current date here
         self.new_date = ""
 
     def show_window(self):  # draw window with adding aa add
@@ -107,9 +110,19 @@ class WindowAddAd(WindowAddPub):  # class for adds
         self.cal.grid(column=2, row=3, sticky=NW)
         WindowAddPub.show_window(self)
 
+    def validation(self):  # add function for check date
+        current_date = datetime.now()
+        if datetime.strptime(self.new_date, '%m/%d/%y') < current_date:
+            self.lbl_c.config(text="Please select a future date.")
+            self.lbl_c.config(bg="Red")
+            return 0
+        else:
+            return 1
+
     def clicked(self):  # proceed with adding an add
         self.new_date = self.cal.get_date()
-        WindowAddPub.clicked(self)
+        if self.validation() == 1:  # if validation ok - close the window
+            WindowAddPub.clicked(self)
 
 
 class WindowAddRec(WindowAddPub):  # class for recipes
@@ -182,7 +195,7 @@ window.show_window()  # add window for select type of publication
 type_of_pub = window.input_type
 
 while window.exit_code == 0:  # open window with adding new publications until exit from the app
-# depends on type of publication create an object of sutable class and proced adding publication to feed
+    # depends on type of publication create an object of sutable class and proced adding publication to feed
     if type_of_pub == "News":
         add_new = WindowAddNews("Add New", "Fill all fields", "Add text of the new:")
         add_new.show_window()
