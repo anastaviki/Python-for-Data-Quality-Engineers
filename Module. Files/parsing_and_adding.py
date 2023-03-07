@@ -17,7 +17,7 @@ class ParcerFile:  # class for parsing file
         self.type_verify = 0
         self.number_of_records = {'new': 0, 'add': 0, "recipe": 0}
 
-    def verify_file(self):
+    def verify_file(self):  # for file verification
         with open(self.path, 'r') as file:
             for line in file.readlines():
                 if re.findall(r"^(\w|\s)+-+$", line):  # find first line of record
@@ -43,14 +43,9 @@ class ParcerFile:  # class for parsing file
         else:
             self.type_verify = 0
 
-
-
-
-
-
     def parc(self):
         self.verify_file()
-        if self.type_verify == 1:
+        if self.type_verify == 1:  # ony if file verification - ok
             with open(self.path, 'r') as file:
                 for line in file.readlines():
                     if re.findall(r"^(\w|\s)+-+$", line):  # find first line of record
@@ -71,7 +66,6 @@ class ParcerFile:  # class for parsing file
                             parc_rec.parc_rec()
                         self.text_of_rec = ""
             os.remove(self.path)
-
 
 
 class ParserRecord:  # class for parsing body of record from file
@@ -177,4 +171,3 @@ class Rec (Publication):  # class for recipes
 
     def add_main_part(self):  # add main part of recipes
         self.add_line_to_feed("Number of calories: " + str(self.cal))
-

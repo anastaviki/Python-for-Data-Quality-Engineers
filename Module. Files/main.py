@@ -71,8 +71,8 @@ while window.exit_code == 0:
         par.parc()
         if par.type_verify == 0:
             success = 0
-    if success == 1:
-        window = Window("Add Publications", "Successfully added Select Type of Publication")
+    if success == 1:  # if succesfully
+        window = Window("Add Publications", "Successfully added, Select Type of Publication")
     else:
         window = Window("Add Publications", "Check your input  and Select Type of Publication", 1)
     window.show_window()

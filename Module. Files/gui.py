@@ -4,6 +4,8 @@ from tkcalendar import Calendar
 from tkinter import filedialog as fd
 from datetime import datetime
 # create class for gui
+
+
 class WindowMain:
     def __init__(self, p_title, p_lable):  # class will have title, lable, button and window itself
         self.title = p_title
@@ -22,7 +24,8 @@ class WindowMain:
 
 
 class Window (WindowMain):  # main window for select type of publication
-    def __init__(self, p_title, p_lable="", p_lable_color=0):  # also have combobox, and button for exit from application
+    def __init__(self, p_title, p_lable="", p_lable_color=0):
+        # also have combobox, and button for exit from application
         WindowMain.__init__(self, p_title, p_lable)
         self.combo = Combobox(self.window)
         self.input_type = 0
@@ -30,7 +33,7 @@ class Window (WindowMain):  # main window for select type of publication
         self.exit_code = 0
         self.lable_color = p_lable_color
 
-    def show_window(self): # graw main window
+    def show_window(self):  # graw main window
         if self.lable_color == 1:
             self.lbl.config(bg="Red")
         self.combo['values'] = ("News", "Privat ad", "Recipe", "Provide records with file",
