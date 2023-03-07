@@ -139,3 +139,126 @@ Number of calories: 947
 ------------------------------
 
 
+News--------------------------
+My first new.
+Second row
+Minsk, 06-03-2023 10:33
+------------------------------
+
+
+Privat ad---------------------
+Do not forgget do smth. Test example
+Actual until: 3/30/23, 23 days left
+------------------------------
+
+
+Recipe------------------------
+2 apples
+5 bananas
+milk
+Number of calories: 585
+------------------------------
+
+
+News--------------------------
+
+, 06-03-2023 10:39
+------------------------------
+
+
+News--------------------------
+
+, 06-03-2023 10:41
+------------------------------
+
+
+News--------------------------
+My first new.
+Second row
+Minsk, 06-03-2023 10:41
+------------------------------
+
+
+Privat ad---------------------
+Do not forgget do smth. Test example
+Actual until: 3/30/23, 23 days left
+------------------------------
+
+
+Recipe------------------------
+2 apples
+5 bananas
+milk
+Number of calories: 574
+------------------------------
+
+
+Privat ad---------------------
+tst
+Actual until: 3/30/23, 23 days left
+------------------------------
+
+
+News--------------------------
+My first new.
+Second row
+Minsk, 07-03-2023 20:26
+------------------------------
+
+
+Privat ad---------------------
+Do not forgget do smth. Test example
+Actual until: 3/30/23, 22 days left
+------------------------------
+
+
+Recipe------------------------
+2 apples
+5 bananas
+milk
+Number of calories: 276
+------------------------------
+
+
+News--------------------------
+My first new.
+Second row
+Minsk, 07-03-2023 20:58
+------------------------------
+
+
+Privat ad---------------------
+Do not forgget do smth. Test example
+Actual until: 3/30/23, 22 days left
+------------------------------
+
+
+Recipe------------------------
+2 apples
+5 bananas
+milk
+Number of calories: 435
+------------------------------
+
+
+News--------------------------
+My first new.
+Second row
+Minsk, 07-03-2023 20:59
+------------------------------
+
+
+Privat ad---------------------
+Do not forgget do smth. Test example
+Actual until: 3/30/23, 22 days left
+------------------------------
+
+
+Recipe------------------------
+2 apples
+5 bananas
+milk
+Number of calories: 625
+------------------------------
+
+
