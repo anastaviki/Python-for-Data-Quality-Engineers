@@ -61,45 +61,39 @@ Number of calories: 734
 ------------------------------
 
 
-News--------------------------
-Json New Example
-Minsk, 13-03-2023 16:18
-------------------------------
-
-
 Recipe------------------------
-Json Recipe Example
-Number of calories: 950
+Test Recipe from xml file with many records
+Number of calories: 423
 ------------------------------
 
 
 Privat ad---------------------
-Json Add Example
-Actual until: 05/05/23, 52 days left
+Test Add from xml file with many records
+Actual until: 10/10/23, 210 days left
 ------------------------------
 
 
 News--------------------------
-Json New Example
-Minsk, 13-03-2023 16:19
-------------------------------
-
-
-News--------------------------
-Json New Example
-Minsk, 13-03-2023 16:19
-------------------------------
-
-
-Privat ad---------------------
-Json Add Example
-Actual until: 05/05/23, 52 days left
+Test New from xml file with one record
+Minsk, 13-03-2023 20:18
 ------------------------------
 
 
 Recipe------------------------
-Json Recipe Example
-Number of calories: 547
+Test New from xml file with many records
+Number of calories: 947
+------------------------------
+
+
+Recipe------------------------
+Test Add from xml file with many records
+Number of calories: 739
+------------------------------
+
+
+Recipe------------------------
+Test Recipe from xml file with many records
+Number of calories: 323
 ------------------------------
 
 

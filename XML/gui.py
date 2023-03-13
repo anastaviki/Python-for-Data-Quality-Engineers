@@ -41,7 +41,10 @@ class Window (WindowMain):  # main window for select type of publication
                                 "Provide Recipe with file",
                                 "Provide records with json",
                                 "Provide New with json", "Provide Private ad with json",
-                                "Provide Recipe with json"
+                                "Provide Recipe with json",
+                                "Provide records with xml",
+                                "Provide New with xml", "Provide Private ad with xml",
+                                "Provide Recipe with xml"
                                 )
         self.combo.current(0)
         self.combo.grid(column=1, row=0)
@@ -169,15 +172,18 @@ class WindowRecordsFromJson (WindowAddFromFile):
         WindowAddFromFile.__init__(self, p_title, p_lable)
         self.filename = "add_records.json"
 
+
 class WindowNewFromJson (WindowAddFromFile):
     def __init__(self, p_title, p_lable):
         WindowAddFromFile.__init__(self, p_title, p_lable)
         self.filename = "add_new.json"
 
+
 class WindowAddFromJson (WindowAddFromFile):
     def __init__(self, p_title, p_lable):
         WindowAddFromFile.__init__(self, p_title, p_lable)
         self.filename = "add_add.json"
+
 
 class WindowRecipeFromJson (WindowAddFromFile):
     def __init__(self, p_title, p_lable):
@@ -185,4 +191,7 @@ class WindowRecipeFromJson (WindowAddFromFile):
         self.filename = "add_recipe.json"
 
 
-
+class WindowRecordsFromXml (WindowAddFromFile):
+    def __init__(self, p_title, p_lable, p_default_file):
+        WindowAddFromFile.__init__(self, p_title, p_lable)
+        self.filename = p_default_file

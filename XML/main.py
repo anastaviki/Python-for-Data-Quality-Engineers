@@ -1,6 +1,6 @@
 # Description
-# Expand previous Homework 5/6/7 with additional class, which allow to provide records by JSON file:
-#
+# Expand previous Homework 5/6/7/8 with additional class, which allow to provide records by XML file:
+
 # 1.Define your input format (one or many records)
 #
 # 2.Default folder or user provided file path
@@ -9,7 +9,7 @@
 
 from gui import *
 from csv_create import *  # import module for statistics
-from parsing_and_adding import *
+from xml_parsing import *
 
 window = Window("Add Publications", "Select Type of Publication")
 window.show_window()  # add window for select type of publication
@@ -86,10 +86,38 @@ while window.exit_code == 0:
         par.parc()
         if par.type_verify == 0:
             success = 0
-    else:
+    elif type_of_pub == "Provide Recipe with json":
         add_file = WindowRecipeFromJson("Add Recipe", "Select file")
         add_file.show_window()
         par = ParserJson(add_file.filename, "Recipe")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
+    elif type_of_pub == "Provide records with xml":
+        add_file = WindowRecordsFromXml("Add Records", "Select file", "add_many_records.xml")
+        add_file.show_window()
+        par = ParserXml(add_file.filename, "Records")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
+    elif type_of_pub == "Provide New with xml":
+        add_file = WindowRecordsFromXml("Add Recipe", "Select file", "add_new.xml")
+        add_file.show_window()
+        par = ParserXml(add_file.filename, "New")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
+    elif type_of_pub == "Provide Private ad with xml":
+        add_file = WindowRecordsFromXml("Add Add", "Select file", "add_add.xml")
+        add_file.show_window()
+        par = ParserXml(add_file.filename, "Add")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
+    else:
+        add_file = WindowRecordsFromXml("Add Recipe", "Select file", "add_recipe.xml")
+        add_file.show_window()
+        par = ParserXml(add_file.filename, "Recipe")
         par.parc()
         if par.type_verify == 0:
             success = 0

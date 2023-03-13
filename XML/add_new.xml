@@ -1,0 +1,6 @@
+<records>
+<record name = "New">
+<text>Test New from xml file with one record</text>
+<city>Minsk</city>
+</record>
+</records>

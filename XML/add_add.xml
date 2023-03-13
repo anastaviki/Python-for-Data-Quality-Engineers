@@ -1,0 +1,6 @@
+<records>
+<record name = "Add">
+<text>Test Add from xml file with many records</text>
+<expiration_date>10/10/23</expiration_date>
+</record>
+</records>
