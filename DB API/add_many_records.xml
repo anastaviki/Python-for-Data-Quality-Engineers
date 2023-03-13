@@ -1,0 +1,13 @@
+<records>
+<record name = "New">
+<text>Test New from xml file with many records</text>
+<city>Minsk</city>
+</record>
+<record name = "Add">
+<text>Test Add from xml file with many records</text>
+<expiration_date>10/10/23</expiration_date>
+</record>
+<record name = "Recipe">
+<text>Test Recipe from xml file with many records</text>
+</record>
+</records>

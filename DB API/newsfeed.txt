@@ -1,0 +1,99 @@
+News--------------------------
+My First New
+Minsk, 26-02-2023 20:08
+------------------------------
+
+
+Privat ad---------------------
+Do not forget do smth
+Actual until: 3/30/23, 31 days left
+------------------------------
+
+
+Recipe------------------------
+2 apples
+5 bananas
+milk
+Number of calories: 669
+------------------------------
+
+
+News--------------------------
+My 2-nd new
+Paris, 26-02-2023 20:09
+------------------------------
+
+
+
+Recipe------------------------
+Json Recipe Example
+Number of calories: 796
+------------------------------
+
+
+Privat ad---------------------
+Json Add Example
+Actual until: 05/05/23, 52 days left
+------------------------------
+
+
+News--------------------------
+Json New Example
+Minsk, 13-03-2023 16:14
+------------------------------
+
+
+News--------------------------
+Json New Example
+Minsk, 13-03-2023 16:15
+------------------------------
+
+
+Privat ad---------------------
+Json Add Example
+Actual until: 05/05/23, 52 days left
+------------------------------
+
+
+Recipe------------------------
+Json Recipe Example
+Number of calories: 734
+------------------------------
+
+
+Recipe------------------------
+Test Recipe from xml file with many records
+Number of calories: 423
+------------------------------
+
+
+Privat ad---------------------
+Test Add from xml file with many records
+Actual until: 10/10/23, 210 days left
+------------------------------
+
+
+News--------------------------
+Test New from xml file with one record
+Minsk, 13-03-2023 20:18
+------------------------------
+
+
+Recipe------------------------
+Test New from xml file with many records
+Number of calories: 947
+------------------------------
+
+
+Recipe------------------------
+Test Add from xml file with many records
+Number of calories: 739
+------------------------------
+
+
+Recipe------------------------
+Test Recipe from xml file with many records
+Number of calories: 323
+------------------------------
+
+
