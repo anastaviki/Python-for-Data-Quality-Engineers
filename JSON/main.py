@@ -67,16 +67,32 @@ while window.exit_code == 0:
     elif type_of_pub == "Provide records with json":
         add_file = WindowRecordsFromJson("Add Records", "Select file")
         add_file.show_window()
-
+        par = ParserJson(add_file.filename, "Records")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
     elif type_of_pub == "Provide New with json":
         add_file = WindowNewFromJson("Add New", "Select file")
         add_file.show_window()
+        par = ParserJson(add_file.filename, "New")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
+
     elif type_of_pub == "Provide Private ad with json":
         add_file = WindowAddFromJson("Add Add", "Select file")
         add_file.show_window()
+        par = ParserJson(add_file.filename, "Add")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
     else:
         add_file = WindowRecipeFromJson("Add Recipe", "Select file")
         add_file.show_window()
+        par = ParserJson(add_file.filename, "Recipe")
+        par.parc()
+        if par.type_verify == 0:
+            success = 0
 
     if success == 1:  # if succesfully
         window = Window("Add Publications", "Successfully added, Select Type of Publication")

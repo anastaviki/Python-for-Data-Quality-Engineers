@@ -24,23 +24,82 @@ Paris, 26-02-2023 20:09
 ------------------------------
 
 
+
 Recipe------------------------
-2 potato
-1 tomato
-3 soup
-Number of calories: 853
-------------------------------
-
-
-News--------------------------
-My Test New
-Moskow, 11-03-2023 16:58
+Json Recipe Example
+Number of calories: 796
 ------------------------------
 
 
 Privat ad---------------------
-My next ADD
-Actual until: 3/23/23, 11 days left
+Json Add Example
+Actual until: 05/05/23, 52 days left
+------------------------------
+
+
+News--------------------------
+Json New Example
+Minsk, 13-03-2023 16:14
+------------------------------
+
+
+News--------------------------
+Json New Example
+Minsk, 13-03-2023 16:15
+------------------------------
+
+
+Privat ad---------------------
+Json Add Example
+Actual until: 05/05/23, 52 days left
+------------------------------
+
+
+Recipe------------------------
+Json Recipe Example
+Number of calories: 734
+------------------------------
+
+
+News--------------------------
+Json New Example
+Minsk, 13-03-2023 16:18
+------------------------------
+
+
+Recipe------------------------
+Json Recipe Example
+Number of calories: 950
+------------------------------
+
+
+Privat ad---------------------
+Json Add Example
+Actual until: 05/05/23, 52 days left
+------------------------------
+
+
+News--------------------------
+Json New Example
+Minsk, 13-03-2023 16:19
+------------------------------
+
+
+News--------------------------
+Json New Example
+Minsk, 13-03-2023 16:19
+------------------------------
+
+
+Privat ad---------------------
+Json Add Example
+Actual until: 05/05/23, 52 days left
+------------------------------
+
+
+Recipe------------------------
+Json Recipe Example
+Number of calories: 547
 ------------------------------
 
 

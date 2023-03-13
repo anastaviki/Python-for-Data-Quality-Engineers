@@ -167,18 +167,22 @@ class WindowRecipeFromFile (WindowAddFromFile):
 class WindowRecordsFromJson (WindowAddFromFile):
     def __init__(self, p_title, p_lable):
         WindowAddFromFile.__init__(self, p_title, p_lable)
+        self.filename = "add_records.json"
 
 class WindowNewFromJson (WindowAddFromFile):
     def __init__(self, p_title, p_lable):
         WindowAddFromFile.__init__(self, p_title, p_lable)
+        self.filename = "add_new.json"
 
 class WindowAddFromJson (WindowAddFromFile):
     def __init__(self, p_title, p_lable):
         WindowAddFromFile.__init__(self, p_title, p_lable)
+        self.filename = "add_add.json"
 
 class WindowRecipeFromJson (WindowAddFromFile):
     def __init__(self, p_title, p_lable):
         WindowAddFromFile.__init__(self, p_title, p_lable)
+        self.filename = "add_recipe.json"
 
 
 

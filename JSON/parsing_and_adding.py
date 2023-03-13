@@ -3,6 +3,7 @@ from datetime import datetime
 import sys
 import os
 import re
+import json
 sys.path.append(os.getcwd() + r"\Strings Object Func")  # add path
 import string_pack as sp  # import string HW
 
@@ -66,6 +67,80 @@ class ParcerFile:  # class for parsing file
                             parc_rec.parc_rec()
                         self.text_of_rec = ""
             os.remove(self.path)
+
+
+# class for parsing json files
+class ParserJson(ParcerFile):
+    def __init__(self, p_file, p_record):
+        ParcerFile.__init__(self, p_file, p_record)
+        self.data = ''
+        self.error_in_date = 0
+        self.rec = {}
+
+    def verify_record(self, rec):  # verify each particular record
+        try:
+            if rec["type_of_record"] == "New":
+                self.number_of_records["new"] += 1
+            elif rec["type_of_record"] == "Add":
+                self.number_of_records["add"] += 1
+            elif rec["type_of_record"] == "Recipe":
+                self.number_of_records["recipe"] += 1
+            current_date = datetime.now()
+            if rec["type_of_record"] == "Add" and datetime.strptime(rec["expiration_date"], '%m/%d/%y') > current_date:
+                self.error_in_date = 0
+            else:
+                self.error_in_date = 1
+
+        except KeyError:
+            print('Check keys')
+
+    def verify_file(self):  # verify file
+        with open(self.path) as f:
+            self.data = json.load(f)
+            if "Records" in self.data:
+                for rec in self.data["Records"]:
+                    self.verify_record(rec)
+            else:
+                self.verify_record(self.data)
+
+        if self.record == "New" and self.number_of_records["new"] == 1 and self.number_of_records["add"] == 0 and \
+                self.number_of_records["recipe"] == 0:
+            self.type_verify = 1
+        elif self.record == "Add" and self.number_of_records["new"] == 0 and self.number_of_records["add"] == 1 and \
+                self.number_of_records["recipe"] == 0 and self.error_in_date == 0:
+            self.type_verify = 1
+        elif self.record == "Recipe" and self.number_of_records["new"] == 0 and self.number_of_records["add"] == 0 and \
+                self.number_of_records["recipe"] == 1:
+            self.type_verify = 1
+        elif self.record == "Records" and self.number_of_records["new"] + self.number_of_records["add"] + \
+                self.number_of_records["recipe"] >= 2:
+            self.type_verify = 1
+        else:
+            self.type_verify = 0
+
+    def parse_record(self, p_rec):  # parse record and create record in file
+        self.record = p_rec["type_of_record"]
+        if self.record == "New":
+            new_from_json = News("News", p_rec["text"], p_rec["city"])
+            new_from_json.add_to_feed()
+        elif self.record == "Add":
+            add_from_json = Ads("Privat ad", p_rec["text"], p_rec["expiration_date"])
+            add_from_json.add_to_feed()
+        else:
+            rec_from_json = Rec("Recipe", p_rec["text"])
+            rec_from_json.add_to_feed()
+
+    def parc(self):  # parse json file
+        self.verify_file()
+        if self.type_verify == 1:
+            with open(self.path) as f:
+                self.data = json.load(f)
+            if "Records" in self.data:
+                for rec in self.data["Records"]:
+                    self.parse_record(rec)
+            else:
+                self.parse_record(self.data)
+            os.remove(self.path)  # if success - delete file
 
 
 class ParserRecord:  # class for parsing body of record from file
@@ -160,6 +235,7 @@ class Ads (Publication):  # class for adds
         self.days_left = 0
 
     def add_main_part(self):  # add main part of add
+
         self.days_left = str((datetime.strptime(self.date_until, '%m/%d/%y')-self.now).days)
         self.add_line_to_feed("Actual until: "+self.date_until+", " + self.days_left + " days left")
 
