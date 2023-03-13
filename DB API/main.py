@@ -10,12 +10,18 @@
 from gui import *
 from csv_create import *  # import module for statistics
 from xml_parsing import *
+from db_api import *
 
 window = Window("Add Publications", "Select Type of Publication")
 window.show_window()  # add window for select type of publication
 type_of_pub = window.input_type
 # open window with adding new publications until exit from the app
 success = 1
+
+db = DatabaseApi() # create tables here
+db.create_table("new_rec", {"text_rec": "VARCHAR(255)", "city": "VARCHAR(255)", "datetime_added": "VARCHAR(255)"})
+db.create_table("private_add", {"text_rec": "VARCHAR(255)", "actual_until": "DATETIME", "days_left": "int"})
+db.create_table("recipe", {"text_rec": "VARCHAR(255)", "calorie": "int"})
 while window.exit_code == 0:
 
     # depends on type of publication create an object of sutable class and proced adding publication to feed

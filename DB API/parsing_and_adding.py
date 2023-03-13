@@ -4,6 +4,7 @@ import sys
 import os
 import re
 import json
+from db_api import DatabaseApi
 sys.path.append(os.getcwd() + r"\Strings Object Func")  # add path
 import string_pack as sp  # import string HW
 
@@ -200,6 +201,9 @@ class Publication:  # class for publications
     def add_last_row(self):  # add last row
         self.add_line_to_feed('-'*30)
 
+    def add_to_db(self):  # implement insert to db here
+        pass
+
     def add_to_feed(self):  # add publication to feed
         self.add_first_row()
         self.add_line_to_feed(self.text)
@@ -207,6 +211,7 @@ class Publication:  # class for publications
         self.add_last_row()
         self.add_line_to_feed("\n")
         self.add_line_to_feed("\n")
+        self.add_to_db()
 
 
 class News (Publication):  # class for news
@@ -216,6 +221,12 @@ class News (Publication):  # class for news
 
     def add_main_part(self):  # add main part of news
         self.add_line_to_feed(self.city + ", " + self.now.strftime("%d-%m-%Y %H:%M"))
+
+    def add_to_db(self):
+        db = DatabaseApi()
+        db.insert_into_table("new_rec", [["text_rec", self.text],
+                                         ["city", self.city],
+                                         ["datetime_added", self.now.strftime("%d-%m-%Y %H:%M")]])
 
 
 class Ads (Publication):  # class for adds
@@ -229,6 +240,12 @@ class Ads (Publication):  # class for adds
         self.days_left = str((datetime.strptime(self.date_until, '%m/%d/%y')-self.now).days)
         self.add_line_to_feed("Actual until: "+self.date_until+", " + self.days_left + " days left")
 
+    def add_to_db(self):
+        db = DatabaseApi()
+        db.insert_into_table("private_add", [["text_rec", self.text],
+                                             ["actual_until", self.date_until],
+                                             ["days_left", self.days_left]])
+
 
 class Rec (Publication):  # class for recipes
     def __init__(self, p_type, p_text):  # also will have numbers of calories
@@ -237,3 +254,8 @@ class Rec (Publication):  # class for recipes
 
     def add_main_part(self):  # add main part of recipes
         self.add_line_to_feed("Number of calories: " + str(self.cal))
+
+    def add_to_db(self):
+        db = DatabaseApi()
+        db.insert_into_table("recipe", [["text_rec", self.text],
+                                        ["calorie", str(self.cal)]])

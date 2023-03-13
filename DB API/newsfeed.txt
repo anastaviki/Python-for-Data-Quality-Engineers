@@ -37,63 +37,100 @@ Actual until: 05/05/23, 52 days left
 ------------------------------
 
 
-News--------------------------
-Json New Example
-Minsk, 13-03-2023 16:14
+
+Recipe------------------------
+Test Recipe from xml file with many records
+Number of calories: 856
 ------------------------------
 
 
 News--------------------------
-Json New Example
-Minsk, 13-03-2023 16:15
+Test DB
+Minsk, 13-03-2023 22:39
+------------------------------
+
+
+News--------------------------
+
+, 13-03-2023 22:39
 ------------------------------
 
 
 Privat ad---------------------
-Json Add Example
-Actual until: 05/05/23, 52 days left
+Test DB
+Actual until: 3/22/23, 8 days left
 ------------------------------
 
 
 Recipe------------------------
-Json Recipe Example
-Number of calories: 734
-------------------------------
-
-
-Recipe------------------------
-Test Recipe from xml file with many records
-Number of calories: 423
-------------------------------
-
-
-Privat ad---------------------
-Test Add from xml file with many records
-Actual until: 10/10/23, 210 days left
+Test DB
+Number of calories: 216
 ------------------------------
 
 
 News--------------------------
-Test New from xml file with one record
-Minsk, 13-03-2023 20:18
+My first new.
+Second row
+Minsk, 13-03-2023 22:39
+------------------------------
+
+
+Privat ad---------------------
+Do not forgget do smth. Test example
+Actual until: 3/30/23, 16 days left
 ------------------------------
 
 
 Recipe------------------------
-Test New from xml file with many records
-Number of calories: 947
+2 apples
+5 bananas
+milk
+Number of calories: 762
+------------------------------
+
+
+News--------------------------
+Test DB
+Minsk, 13-03-2023 22:42
+------------------------------
+
+
+News--------------------------
+Test DB
+Minsk, 13-03-2023 22:43
+------------------------------
+
+
+Privat ad---------------------
+Test DV
+Actual until: 3/22/23, 8 days left
 ------------------------------
 
 
 Recipe------------------------
-Test Add from xml file with many records
-Number of calories: 739
+Test DB
+Number of calories: 823
+------------------------------
+
+
+News--------------------------
+My first new.
+Second row
+Minsk, 13-03-2023 22:44
+------------------------------
+
+
+Privat ad---------------------
+Do not forgget do smth. Test example
+Actual until: 3/30/23, 16 days left
 ------------------------------
 
 
 Recipe------------------------
-Test Recipe from xml file with many records
-Number of calories: 323
+2 apples
+5 bananas
+milk
+Number of calories: 676
 ------------------------------
 
 
