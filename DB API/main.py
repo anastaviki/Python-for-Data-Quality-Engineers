@@ -1,11 +1,11 @@
 # Description
-# Expand previous Homework 5/6/7/8 with additional class, which allow to provide records by XML file:
-
-# 1.Define your input format (one or many records)
+# Expand previous Homework 5/6/7/8/9 with additional class, which allow to save records into database:
 #
-# 2.Default folder or user provided file path
+# 1.Different types of records require different data tables
 #
-# 3.Remove file if it was successfully processed
+# 2.New record creates new row in data table
+#
+# 3.Implement “no duplicate” check.
 
 from gui import *
 from csv_create import *  # import module for statistics
