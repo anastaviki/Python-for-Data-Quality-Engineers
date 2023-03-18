@@ -18,6 +18,22 @@ class ParcerFile:  # class for parsing file
         self.type_verify = 0
         self.number_of_records = {'new': 0, 'add': 0, "recipe": 0}
 
+    def check_verify(self):
+        if self.record == "New" and self.number_of_records["new"] == 1 and self.number_of_records["add"] == 0 and \
+                self.number_of_records["recipe"] == 0:
+            self.type_verify = 1
+        elif self.record == "Add" and self.number_of_records["new"] == 0 and self.number_of_records["add"] == 1 and \
+                self.number_of_records["recipe"] == 0 and self.error_in_date == 0:
+            self.type_verify = 1
+        elif self.record == "Recipe" and self.number_of_records["new"] == 0 and self.number_of_records["add"] == 0 and \
+                self.number_of_records["recipe"] == 1:
+            self.type_verify = 1
+        elif self.record == "Records" and self.number_of_records["new"] + self.number_of_records["add"] + \
+                self.number_of_records["recipe"] >= 2:
+            self.type_verify = 1
+        else:
+            self.type_verify = 0
+
     def verify_file(self):  # for file verification
         with open(self.path, 'r') as file:
             for line in file.readlines():
@@ -29,20 +45,7 @@ class ParcerFile:  # class for parsing file
                         self.number_of_records["add"] = self.number_of_records["add"]+1
                     else:
                         self.number_of_records["recipe"] = self.number_of_records["recipe"]+1
-        if self.record == "New" and self.number_of_records["new"] == 1 and self.number_of_records["add"] == 0 and \
-                self.number_of_records["recipe"] == 0:
-            self.type_verify = 1
-        elif self.record == "Add" and self.number_of_records["new"] == 0 and self.number_of_records["add"] == 1 and \
-                self.number_of_records["recipe"] == 0:
-            self.type_verify = 1
-        elif self.record == "Recipe" and self.number_of_records["new"] == 0 and self.number_of_records["add"] == 0 and \
-                self.number_of_records["recipe"] == 1:
-            self.type_verify = 1
-        elif self.record == "Records" and self.number_of_records["new"] + self.number_of_records["add"] + \
-                self.number_of_records["recipe"] >= 2:
-            self.type_verify = 1
-        else:
-            self.type_verify = 0
+        self.check_verify()
 
     def parc(self):
         self.verify_file()
@@ -149,8 +152,7 @@ class ParserRecord:  # class for parsing body of record from file
         self.text_of_record = p_text
         self.main_text = ""
 
-    def parc_rec(self):
-        pass
+
 
 
 class ParserNew (ParserRecord):  # parsing of New body from file

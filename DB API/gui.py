@@ -27,7 +27,7 @@ class Window (WindowMain):  # main window for select type of publication
     def __init__(self, p_title, p_lable="", p_lable_color=0):
         # also have combobox, and button for exit from application
         WindowMain.__init__(self, p_title, p_lable)
-        self.combo = Combobox(self.window)
+        self.combo = Combobox(self.window, width=30)
         self.input_type = 0
         self.btn_ex = Button(self.window, text="Exit", command=self.exit_v)
         self.exit_code = 0
